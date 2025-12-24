@@ -1,0 +1,87 @@
+# STS(Security Token Service API):
+---------------------------------
+# 1. AssumeRole
+aws sts assume-role --role-arn <role-arn> --role-session-name <session-name> --duration-seconds <seconds>
+# 2. AssumeRoleWithSAML
+aws sts assume-role-with-saml --role-arn <role-arn> --principal-arn <principal-arn> --saml-assertion <saml-assertion> --duration-seconds <seconds>
+# 3. AssumeRoleWithWebIdentity  
+aws sts assume-role-with-web-identity --role-arn <role-arn> --role-session-name <session-name> --web-identity-token <token> --duration-seconds <seconds>
+# 4. GetCallerIdentity  
+aws sts get-caller-identity
+# 5. GetFederationToken 
+aws sts get-federation-token --name <name> --duration-seconds <seconds> --policy <policy-json>
+# 6. GetSessionToken
+aws sts get-session-token --duration-seconds <seconds> --serial-number <mfa-serial> --token-code <mfa-token>        
+# 7. DecodeAuthorizationMessage
+aws sts decode-authorization-message --encoded-message <encoded-message> 
+# 8. GetAccessKeyInfo
+aws sts get-access-key-info --access-key-id <access-key-id>
+# 9. TagSession
+aws sts tag-session --tags Key=<key1>,Value=<value1> Key=<key2>,Value=<value2> --duration-seconds <seconds> --serial-number <mfa-serial> --token-code <mfa-token>
+# 10. UntagSession  
+aws sts untag-session --tag-keys <key1> <key2> --serial-number <mfa-serial> --token-code <mfa-token>    
+# 11. GetServiceBearerToken
+aws sts get-service-bearer-token --service-id <service-id> --duration-seconds <seconds> 
+# Note: Replace placeholders (e.g., <role-arn>, <session-name>) with actual values when executing commands. 
+---------------------------------
+
+# About STS(Security Token Service):
+------------------------------------
+-> AWS Security Token Service (STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users or for users that you authenticate (federated users). This is particularly useful for scenarios where you want to grant access to AWS resources without sharing long-term credentials. 
+-> STS is commonly used in scenarios such as cross-account access, federated user access, and mobile or web applications that need temporary access to AWS resources.   
+-> Temporary security credentials provided by STS consist of an access key ID, a secret access key, and a security token. These credentials are valid for a specified duration, after which they expire and can no longer be used.  
+-> STS supports various API operations, including AssumeRole, AssumeRoleWithSAML, AssumeRoleWithWebIdentity, GetSessionToken, and GetCallerIdentity, among others. Each operation serves a specific purpose in managing temporary credentials and access to AWS resources.  
+-> By using STS, you can enhance the security of your AWS environment by minimizing the exposure of long-term credentials and implementing fine-grained access control based on temporary credentials.  
+---------------------------------
+
+# Flow Diagram:
+```plaintext
++-------------------+          +-------------------+          +-------------------+
+|                   |          |                   |          |                   | 
+|   User/Client     |  ----->   |      STS          |  ----->   |   AWS Resources   |
+|                   |  Request |                   |  Response |                   |    
++-------------------+          +-------------------+          +-------------------+
+         |                             |                             |
+         | 1. Request Temporary        |                             |
+         |    Credentials              |                             |
+         |---------------------------->|                             |
+         |                             |                             |
+         |                             | 2. Validate Request         |
+         |                             |---------------------------->|
+         |                             |                             |
+         |                             | 3. Generate Temporary       |
+         |                             |    Credentials              |
+         |                             |<----------------------------|
+         | 4. Receive Temporary        |                             |
+         |    Credentials              |                             |
+         |<----------------------------|                             |
+         |                             |                             |
+         | 5. Access AWS Resources     |                             |
+         |    Using Temporary          |                             |
+         |    Credentials              |                             |
+         |---------------------------->|                             |
+         |                             |                             |  
+         |                             | 6. Grant Access to          |   
+         |                             |    AWS Resources            |
+         |                             |---------------------------->|   
+         |                             |                             |
+         |                             | 7. Access Granted           |
+         |                             |<----------------------------|
+``` 
+---------------------------------   
+# Steps:
+-> To use AWS STS, you typically follow these steps:
+1. Set Up IAM Roles or Users: Create IAM roles or users with the necessary permissions to access AWS resources.
+2. Request Temporary Credentials: Use the STS API operations (e.g., AssumeRole, GetSessionToken) to request temporary security credentials.
+3. Use Temporary Credentials: Use the temporary credentials to access AWS resources as needed.  
+4. Handle Expiration: Monitor the expiration of temporary credentials and request new ones as needed.
+---------------------------------
+
+
+# STS Importent API's:
+1. AssumeRole: This API operation allows you to assume a specified IAM role and obtain temporary security credentials. It is commonly used for cross-account access and delegation of permissions.
+2. GetCallerIdentity: This API operation returns details about the IAM user or role whose credentials are used to call the operation. It is useful for verifying the identity of the caller.
+3. GetSessionToken: This API operation provides temporary security credentials for IAM users or federated users. It is often used in scenarios where you need to provide temporary access to AWS resources.
+4. AssumeRoleWithSAML: This API operation allows you to assume a role using SAML-based authentication. It is commonly used in federated access scenarios where users authenticate through an external identity provider.
+5. AssumeRoleWithWebIdentity: This API operation allows you to assume a role using web identity tokens, such as those from Amazon Cognito or other identity providers. It is useful for mobile and web applications that require temporary access to AWS resources.
+---------------------------------   

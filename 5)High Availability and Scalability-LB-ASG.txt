@@ -1,0 +1,131 @@
+# High Availability and Scalability
+## Elastic Load Balancing (ELB)
+- Automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances.
+- Provides high availability by routing traffic only to healthy instances.
+- Supports both application and network load balancing.
+
+## Auto Scaling Groups (ASG)
+- Automatically adjusts the number of EC2 instances in response to changing demand.
+- Ensures that the right number of instances are running to handle the load.
+- Can be configured to scale in (terminate instances) or scale out (launch instances) based on CloudWatch metrics.
+
+### Load balancing:
+    ===============
+    - Ensures even distribution of incoming traffic across multiple targets.
+    - Improves fault tolerance by rerouting traffic from unhealthy instances.
+    - Can be integrated with Auto Scaling to dynamically adjust to traffic patterns.
+    # Types of Load Balancers in AWS:
+    1. Elastic Load Balancer (ELB)
+    2. Application Load Balancer (ALB)
+    3. Network Load Balancer (NLB)
+    4. Gateway Load Balancer (GWLB)
+    # Elastic Load Balancer (ELB) Features:
+        - Supports both HTTP/HTTPS and TCP protocols.
+        - Provides SSL termination to offload encryption/decryption from instances.
+        - Offers sticky sessions to bind a user's session to a specific instance.
+        - Integrates with AWS Certificate Manager for SSL/TLS certificates.
+        - Provides health checks to monitor the status of registered targets.
+        - Can handle millions of requests per second while maintaining low latency.
+    # Application Load Balancer (ALB) Features:
+        - Operates at the application layer (HTTP/HTTPS).
+        - Supports advanced routing based on URL paths and hostnames.
+        - Provides WebSocket support for real-time communication.
+        - Can route requests to multiple services based on content. 
+        - Supports containerized applications with dynamic port mapping.
+        - Integrates with AWS WAF for web application firewall capabilities.
+        - Provides detailed metrics and logging for monitoring application performance.
+        - Supports HTTP/2 and gRPC protocols for improved performance.
+        - Offers support for path-based and host-based routing.
+        - Can be used with AWS App Mesh for microservices architecture.
+        - Provides integration with AWS Lambda for serverless applications.
+        - Supports authentication and authorization using AWS Cognito or OIDC providers.
+        - Can be configured with target groups to manage routing to specific instances or services.
+        - Provides access logs for detailed request information.    
+        - Supports cross-zone load balancing to distribute traffic evenly across multiple Availability Zones.
+        - Can be integrated with AWS Global Accelerator for improved global application performance.    
+        - Offers support for health checks to ensure that only healthy instances receive traffic.
+        - Provides options for session stickiness to maintain user sessions across multiple requests.   
+        - Can be used with AWS Secrets Manager for secure management of sensitive information.
+        - Supports integration with Amazon CloudWatch for monitoring and alerting.  
+    # Network Load Balancer (NLB) Features:
+        - Operates at the transport layer (TCP/UDP).
+        - Capable of handling millions of requests per second.
+        - Provides static IP addresses for the load balancer.
+        - Supports TLS termination and passthrough.
+        - Ideal for load balancing of TCP traffic.  
+        - Provides low latency and high throughput.
+        - Can handle sudden and volatile traffic patterns.
+        - Supports health checks to ensure availability of targets.
+        - Can be used with AWS PrivateLink for private connectivity to services.
+        - Supports cross-zone load balancing to distribute traffic evenly across multiple Availability Zones.
+        - Can be integrated with AWS Global Accelerator for improved global application performance.
+        - Provides access logs for detailed request information.
+        - Supports sticky sessions to maintain user session state across requests.
+        - Can be configured with target groups to manage routing to specific instances or services.
+        - Offers integration with AWS Lambda for serverless applications.
+        - Provides support for health checks to ensure that only healthy instances receive traffic.
+        - Can be used with AWS Secrets Manager for secure management of sensitive information.  
+        - Supports integration with Amazon CloudWatch for monitoring and alerting.
+        - Provides options for cross-region load balancing to enhance disaster recovery and failover capabilities.  
+    # Gateway Load Balancer (GWLB) Features:
+        - Combines a transparent network gateway with a load balancer.  
+        - Ideal for deploying third-party virtual appliances, such as firewalls and intrusion detection systems.
+        - Provides a single entry point for traffic to pass through the appliances.
+        - Supports scaling of virtual appliances based on traffic load.
+        - Integrates with AWS Marketplace for third-party appliance deployment.
+        - Provides health checks to ensure availability of appliances.
+        - Can be used in conjunction with other load balancers for comprehensive traffic management.
+        - Supports both IPv4 and IPv6 traffic.  
+        - Provides detailed metrics and logging for monitoring performance.
+        - Can be configured with security groups and network ACLs for enhanced security.    
+        - Supports cross-zone load balancing to distribute traffic evenly across multiple Availability Zones.
+        - Can be integrated with Route 53 for DNS-based load balancing.
+        - Provides access logs for detailed request information.
+        - Supports sticky sessions to maintain user session state across requests.
+        - Can be configured with target groups to manage routing to specific instances or services.
+        - Offers integration with AWS Lambda for serverless applications.   
+        - Provides support for health checks to ensure that only healthy instances receive traffic.
+        - Can be used with AWS Global Accelerator for improved global application performance.  
+        - Supports integration with Amazon CloudFront for content delivery network (CDN) capabilities.
+        - Provides options for cross-region load balancing to enhance disaster recovery and failover capabilities.
+        - Can be configured with custom error responses to improve user experience during outages.
+        - Supports integration with AWS Identity and Access Management (IAM) for access control.    
+        - Provides options for session stickiness to maintain user sessions across multiple requests.
+        - Can be used with AWS Secrets Manager for secure management of sensitive information.  
+
+# Demo and steps to create Application Load Balancer (ALB) with multiple targets and rules:
+--------------------------------------------------------------------------------------------
+1. **Create an Application Load Balancer (ALB)**:
+   - Go to the AWS Management Console.
+   - Navigate to the EC2 service.
+   - Select "Load Balancers" from the left menu.
+   - Click on "Create Load Balancer".
+   - Choose "Application Load Balancer".
+   - Configure the ALB settings (name, scheme, IP address type).
+   - Select the VPC and Availability Zones.
+    - Configure security groups to allow traffic on the desired ports (e.g., HTTP/HTTPS).
+    - Review and create the ALB.
+2. **Create Target Groups**:
+   - In the EC2 console, select "Target Groups" from the left menu.
+   - Click on "Create target group".
+   - Choose the target type (e.g., instance, IP, Lambda).
+   - Configure the target group settings (name, protocol, port).
+   - Select the VPC.
+   - Configure health checks.
+   - Review and create the target group.
+3. **Register Targets**:
+   - After creating the target group, select it from the list.
+   - Click on the "Targets" tab.
+   - Click on "Edit" to register targets.
+   - Select the instances or IP addresses to include in the target group.
+   - Click on "Add to registered" and then "Save".
+4. **Create Listener Rules**:
+   - Go back to the ALB configuration.
+   - Select the "Listeners" tab.
+   - Click on "View/edit rules" for the desired listener.
+   - Add rules to route traffic to the appropriate target groups based on conditions (e.g., path-based routing).
+   - Review and save the listener rules.    
+5. **Test the Load Balancer**:
+   - Obtain the DNS name of the ALB from the Load Balancers page.
+   - Use a web browser or a tool like curl to send requests to the ALB's DNS name.
+   - Verify that the requests are properly routed to the target groups and that the expected responses are returned.        

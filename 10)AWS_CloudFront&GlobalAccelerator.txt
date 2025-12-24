@@ -1,0 +1,107 @@
+# AWS CloudFront & Global Accelerator:
+---------------------------------------
+    => AWS CloudFront is a content delivery network (CDN) that securely delivers data, videos, applications, and APIs to customers globally with low latency and high transfer speeds.
+    => AWS Global Accelerator is a networking service that improves the availability and performance of your applications with users globally.
+    => Global Accelerator directs traffic to the optimal endpoint based on health, geography, and routing policies.
+    => Both services integrate with other AWS services and provide features like DDoS protection, SSL/TLS encryption, and real-time metrics.
+    => CloudFront can cache content at edge locations for faster delivery, while Global Accelerator optimizes routing for improved performance.
+    => Use cases include website acceleration, media distribution, API acceleration, and global application delivery.
+
+# AWS CloudFront:
+----------------------------------------
+            => CloudFront supports dynamic and static content delivery, including media streaming and API responses.
+            => It provides edge locations around the world to cache content closer to users, reducing latency.
+            => CloudFront integrates with AWS services like S3, EC2, and Lambda@Edge for serverless computing at the edge.
+            => It offers features like custom SSL certificates, geo-restriction, and access logs for monitoring.
+            => CloudFront can be used for both web applications and mobile applications to enhance user experience.
+            # AWS CloudFront-Architecture(ex-S3 as origin):
+            ----------------------------------------------
+                [User]
+                |
+                v
+            [CloudFront Distribution]
+                |
+                v
+            [Edge Locations (CDN Cache)]
+                |
+                v
+            [Origin: Amazon S3 Bucket]
+                |
+                v
+            [Stored Content (Static files, images, videos, etc.)]
+
+            # Diagram (Text-based):
+
+            +--------+         +---------------------+         +-------------------+
+            |  User  | <-----> | CloudFront Edge     | <-----> |   S3 Bucket       |
+            +--------+         | Locations (CDN)     |         | (Origin Server)   |
+            +------------------+---------------------+         +-------------------+
+
+            - User requests content (e.g., image, video, HTML).
+            - CloudFront checks if content is cached at the nearest edge location.
+            - If cached, CloudFront serves content directly (low latency).
+            - If not cached, CloudFront fetches content from the S3 origin, caches it at the edge, and serves it to the user.
+            - Subsequent requests are served from the edge cache until the cache expires.
+
+        # AWS CloudFront-Origins:
+        ----------------------------------------
+            => CloudFront origins are the sources of content that CloudFront delivers to users.
+            => You can configure multiple origins for a CloudFront distribution, allowing you to serve content from different sources.
+            => Common origin types include Amazon S3 buckets, Amazon EC2 instances, and custom HTTP servers.
+            => CloudFront can route requests to the appropriate origin based on path patterns, query strings, and other criteria.
+            => You can also configure origin failover to automatically route requests to a backup origin if the primary origin is unavailable.
+            => Origin access identity (OAI) can be used to restrict access to S3 buckets, ensuring that only CloudFront can access the content. 
+            #Diagram For CloudFront Origins:  
+
+            +-------------------+
+            |   CloudFront      |
+            |   Distribution    |
+            +-------------------+
+                /         \
+                /           \
+                v             v
+        [Origin 1: S3]   [Origin 2: EC2] 
+
+                [Origin 3: Custom HTTP Server]
+                |             |             |
+                +-------------+-------------+
+                                |
+                                v
+                        [Content Delivery]
+            
+            - CloudFront routes requests to the appropriate origin based on the request path or other criteria.
+            - Each origin can have its own caching behavior and settings.
+            - This architecture allows for flexible content delivery from multiple sources.
+        # AWS CloudFront geo-restriction:
+
+            - Geo-restriction allows you to control access to your content based on the geographic location of your users.
+            - You can use geo-restriction to whitelist or blacklist specific countries or regions.
+            - This feature is useful for complying with licensing agreements or regulatory requirements.
+            - CloudFront uses the viewer's IP address to determine their location and enforce geo-restriction rules.
+            - You can configure geo-restriction settings in the CloudFront distribution settings.
+
+        # AWS CloudFront price classes:
+            - CloudFront offers different price classes to help you manage costs based on your content delivery needs.
+            - Price classes determine the edge locations that CloudFront uses to deliver your content.
+            - The available price classes are:
+                - Price Class 100: Includes only the least expensive edge locations (U.S., Canada, and Europe).
+                - Price Class 200: Includes all edge locations except those in Asia and South America.
+                - Price Class All: Includes all edge locations worldwide.
+            - You can choose a price class when creating or updating a CloudFront distribution.
+            - Using a lower price class can help reduce costs, but may also impact performance for users in regions not covered by the selected class.
+        # AWS CloudFront cache invalidation:
+            - Cache invalidation is the process of removing cached content from CloudFront edge locations.
+            - You can invalidate cached objects to ensure that users receive the latest version of your content.
+            - Invalidation requests can be submitted through the AWS Management Console, AWS CLI, or CloudFront API.
+            - You can invalidate specific objects by their path or use wildcard patterns to invalidate multiple objects.
+            - Cache invalidation is not instantaneous and may take some time to propagate to all edge locations.
+#AWS Global Accelerator:
+----------------------------------------
+            - AWS Global Accelerator is a networking service that improves the availability and performance of your applications with users globally.
+            - It provides static IP addresses that act as a fixed entry point to your application endpoints, such as EC2 instances, load balancers, or S3 buckets.
+            - Global Accelerator uses the AWS global network to optimize the path to your application, reducing latency and improving performance.
+            - You can configure routing policies to direct user traffic to the optimal endpoint based on health, geography, or other criteria.
+            - Global Accelerator provides built-in DDoS protection and integrates with AWS Shield for enhanced security.
+            - You can monitor the performance of your application using Amazon CloudWatch metrics and set up alarms for specific thresholds.
+            - Global Accelerator is easy to set up and can be managed through the AWS Management Console, AWS CLI, or SDKs. 
+            

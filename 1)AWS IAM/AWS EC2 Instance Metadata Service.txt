@@ -1,0 +1,35 @@
+# AWS EC2 Instance Metadata Service (IMDS):
+-------------------------------------------
+-> The AWS EC2 Instance Metadata Service (IMDS) is a service that runs on EC2 instances and provides metadata about the instance, such as its instance ID, public IP address, security groups, and more. This metadata can be accessed from within the instance itself without the need for external network calls.
+-> IMDS is commonly used by applications running on EC2 instances to retrieve information about the instance, configure the instance, or obtain temporary security credentials for accessing other AWS services.
+-> The metadata is accessible via a special link-local IP address (http://169.254.169.254/latest/meta-data).
+-> IMDS supports two versions: IMDSv1 and IMDSv2. IMDSv2 introduces additional security features, such as session tokens, to help protect against certain types of attacks, such as SSRF (Server-Side Request Forgery).
+-------------------------------------------
+
+#IMDSv1 VS IMDSv2:
+-------------------------------------------
+-> IMDSv1:
+   - Simple HTTP GET requests to access metadata.
+   - Vulnerable to SSRF attacks since it does not require any authentication.   
+-> IMDSv2:
+   - Requires a session token to access metadata.
+   - The session token is obtained by making a PUT request to the IMDS endpoint.
+   - Provides enhanced security against SSRF attacks by requiring the token for subsequent metadata requests.
+-------------------------------------------
+# Accessing IMDS:
+-------------------------------------------
+-> To access IMDS from within an EC2 instance, you can use tools like curl or wget. For example, to retrieve the instance ID using IMDSv1, you can run:
+   curl http://169.254.169.254/latest/meta-data/instance-id 
+-> To use IMDSv2, you first need to obtain a session token:
+   TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")  
+   Then, you can use the token to access metadata:
+   curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/instance-id
+------------------------------------------- 
+# Configuring IMDS:
+-------------------------------------------
+-> You can configure the IMDS settings for your EC2 instances using instance metadata options. This includes settings such as:
+   - Enabling or disabling IMDSv2.
+   - Setting the hop limit to control how many network hops are allowed when accessing IMDS.
+   - Configuring the response hop limit to restrict access to IMDS from within the instance.
+-> These settings can be configured during instance launch or modified for existing instances using the AWS Management Console, AWS CLI, or SDKs.
+------------------------------------------- 

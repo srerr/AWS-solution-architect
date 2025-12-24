@@ -1,0 +1,26 @@
+->region = cluster of data centers
+->az =Each region has many availability zones (usually 3,min is 3, max is 6).
+
+#AWS point of presence(Edge Locations):
+---------------------------------------
+->Amazon has 400+ point of presence (400+ edge locations & 10+ regional caches) in 90+ cities across 40+ countries
+->content is delivered to end users with lower latency
+
+#AWS global services:
+---------------------
+->Identity and Access Management (IAM)
+->Route 53(DNS service)
+->CloudFront(Content Delivery Network)
+->WAF (Web Application Firewall)
+
+#Most AWS services are Region-scoped:
+-------------------------------------
+->Amazon EC2(infrastructure as a service)
+->Elastic Beanstalk (Platform as a Service)
+->Lambda(Function as a service)
+->Rekognition(Software as a Service)
+
+
+
+
+

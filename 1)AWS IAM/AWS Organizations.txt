@@ -1,0 +1,58 @@
+# AWS Organizations:
+--------------------
+-> AWS Organizations is a service that enables you to centrally manage and govern multiple AWS accounts within your organization. It provides a way to create and manage accounts, apply policies, and consolidate billing across those accounts.
+-> With AWS Organizations, you can create organizational units (OUs) to group accounts based on             your business needs. This allows you to apply policies and manage permissions at the OU level, making it easier to enforce governance and compliance across your organization.
+-> AWS Organizations supports service control policies (SCPs), which are a type of policy that allow you to define the maximum permissions for accounts within your organization. SCPs help you ensure that accounts adhere to your organization's security and compliance requirements.
+-> The service also provides consolidated billing, allowing you to combine the usage and costs of multiple accounts into a single bill. This can help you take advantage of volume discounts and simplify the billing process.
+-> By using AWS Organizations, you can streamline the management of your AWS environment, improve security and compliance, and optimize costs across multiple accounts.
+--------------------
+
+# Flow Diagram:
+```plaintext
++-------------------+          +-------------------+          +-------------------+
+|                   |          |                   |          |                   |
+|   Master Account  |  ----->   |   AWS            |  ----->   |   Member Accounts |
+|                   |  Create  |   Organizations   |  Manage   |                   |
++-------------------+  Account +-------------------+  Policies +-------------------+
+         |                             |                             |
+         | 1. Create Member Accounts   |                             |
+         |---------------------------->|                             |
+         |                             |                             |
+         |                             | 2. Organize Accounts into   |
+         |                             |    Organizational Units     |
+         |                             |---------------------------->|
+         |                             |                             |
+         |                             | 3. Apply Service Control    |
+         |                             |    Policies                 |
+         |                             |<----------------------------|
+         | 4. Manage Permissions       |                             |
+         |    and Access               |                             |
+         |<----------------------------|                             |
+         |                             |                             |
+         | 5. Consolidated Billing     |                             |
+         |    Across Accounts          |                             |
+         |---------------------------->|                             |
+         |                             |                             |
+         |                             | 6. Generate Consolidated    |
+         |                             |    Bill                    |
+         |                             |<----------------------------|      
+```
+--------------------    
+
+# Steps:
+-> To use AWS Organizations, you typically follow these steps:
+1. Create a Master Account: Set up a master account that will be used to manage your organization.
+2. Create Member Accounts: Use the master account to create and invite member accounts to join your organization.
+3. Organize Accounts: Group member accounts into organizational units (OUs) based on your business needs.
+4. Apply Policies: Define and apply service control policies (SCPs) to manage permissions and enforce governance across your organization.
+5. Consolidate Billing: Enable consolidated billing to combine usage and costs across all accounts into a single bill.
+--------------------    
+
+# AWS Service Control Policies (SCPs):
+1. Deny All Except Specific Services: This SCP denies all AWS services except for a specified list of services that you want to allow.
+2. Allow Read-Only Access: This SCP grants read-only access to all AWS services, allowing users to view resources without making any changes.
+3. Restrict Access to Specific Regions: This SCP limits access to AWS services to specific regions, preventing users from creating or managing resources outside of those regions.
+4. Enforce MFA for Sensitive Actions: This SCP requires multi-factor authentication (MFA) for performing sensitive actions, such as deleting resources or modifying security settings.
+5. Limit S3 Bucket Access: This SCP restricts access to specific S3 buckets, allowing users to only read or write to designated buckets.
+--------------------    
+
