@@ -1,0 +1,114 @@
+# AWS VPC(Virtual Private Cloud) Fundamentals:
+----------------------------------------------
+--> VPC(Virtual private Cloud) scope: Reginal level
+--> Subnet scope: AZ(Availability Zone) level
+-->EC2 scope: Region and AZ level
+-->S3 scope: Regional level
+-->DynamoDB scope: Reginal level
+-->Route53 scope: Global level
+-->IAM: Global level
+----------------------------------
+--> VPC is a virtual network dedicated to your AWS account.
+--> VPC is logically isolated from other virtual networks in the AWS Cloud.
+--> You can launch your AWS resources, such as EC2 instances, into your VPC.
+--> You can define a virtual network topology that closely resembles a traditional network that you might operate in your own data center, including selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways.
+--> You can use both IPv4 and IPv6 in your VPC for secure and easy access to resources and applications.
+--> You can customize the network configuration for your VPC. For example, you can create a public-facing subnet for your web servers that has access to the internet, and place your backend systems, such as databases or application servers, in a private-facing subnet with no internet access. You can leverage multiple layers of security, including security groups and network access control lists, to help control access to Amazon EC2 instances in each subnet.
+--> You can easily customize the network configuration for your VPC. For example, you can create a public-facing subnet for your web servers that has access to the internet, and place your backend systems, such as databases or application servers, in a private-facing subnet with no internet access. You can leverage multiple layers of security, including security groups and network access control lists, to help control access to Amazon EC2 instances in each subnet.
+--> You can use VPC to host your multi-tier web applications and strictly enforce access and security restrictions between your web servers, application servers, and databases.
+--> You can also connect your VPC to your own corporate data center, making the AWS Cloud an extension of your data center.
+----------------------------------------------
+--> By default, each AWS account has a default VPC in each AWS Region.
+--> A default VPC is ready for you to use. It includes a default subnet in each Availability Zone, an internet gateway, and default security group.
+--> You can launch your instances into the default VPC without needing to create and configure a VPC first.
+--> You can choose to keep using the default VPC, or you can create your own custom VPCs.
+----------------------------------------------
+
+# VPC Building Blocks:
+----------------------
+--> Region: A geographical area that consists of two or more Availability Zones.
+--> Availability Zone(AZ): A distinct location within a region that is insulated from failures in other Availability Zones, and provides inexpensive, low-latency network connectivity to other Availability Zones in the same region.
+--> VPC: A virtual network dedicated to your AWS account.
+--> Subnet: A range of IP addresses in your VPC.
+--> Route Table: A set of rules, called routes, that are used to determine where network traffic is directed.
+--> Internet Gateway(IGW): A horizontally scaled, redundant, and highly available VPC component that allows communication between instances in your VPC and the internet.
+--> NAT Gateway: A NAT gateway enables instances in a private subnet to connect to the internet or other AWS services, but prevents the internet from initiating a connection with those instances.
+--> Elastic IP Address: A static, public IPv4 address designed for dynamic cloud computing. An Elastic IP address is associated with your AWS account.      
+--> Security Group: A virtual firewall that controls the traffic for one or more instances.
+--> Network Access Control List(ACL): An optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets.
+--> DHCP Options Set: A set of configuration parameters that are passed to instances when they boot up.
+-->Route 53 Resolver: A regional DNS service that provides name resolution for VPCs.
+----------------------------------------------
+
+#VPC Addressing(CIDR):
+----------------------
+--> When you create a VPC, you must specify an IPv4 CIDR block for the VPC.
+--> The CIDR block you specify must meet the following requirements:
+   - The CIDR block must be between /16 and /28 netmask.
+   - The CIDR block must not overlap with any existing VPC in your account in the same region.
+--> You can optionally assign an IPv6 CIDR block to your VPC.
+--> You can create subnets in your VPC by dividing the VPC's CIDR block into smaller CIDR blocks.
+--> Each subnet must reside entirely within one Availability Zone and cannot span zones.
+--> You can create multiple subnets in a VPC, and each subnet must have a unique CIDR block that is a subset of the VPC's CIDR block.
+--> AWS reserves the first four IP addresses and the last IP address in each subnet's CIDR block.
+   - The first IP address is the network address.
+   - The second IP address is reserved for the VPC router.
+   - The third IP address is reserved for future use.
+   - The fourth IP address is reserved for the DNS server.
+   - The last IP address is the broadcast address.
+----------------------------------------------
+
+# VPC Route Tables:
+----------------------
+--> A route table contains a set of rules, called routes, that are used to determine where network traffic is directed.
+--> Each route table is associated with a VPC.
+--> You can create multiple route tables for a VPC.
+--> Each subnet in your VPC must be associated with a route table, which controls the routing for the subnet.
+--> If you do not explicitly associate a subnet with a particular route table, the subnet is automatically associated with the main route table for the VPC.
+--> A route in a route table specifies a destination CIDR block and a target.
+--> The target can be an internet gateway, a NAT gateway, a VPC peering connection, or a network interface.
+--> When an instance in a subnet sends traffic, the route table associated with the subnet is used to determine where to send the traffic.
+----------------------------------------------  
+
+# IP Addresses in VPC:
+----------------------
+--> Each instance in a VPC is automatically assigned a private IPv4 address from the IPv4 address range of the subnet.
+--> You can optionally assign a public IPv4 address to an instance in a VPC.
+--> You can also assign an Elastic IP address to an instance in a VPC.
+--> An Elastic IP address is a static, public IPv4 address that you can allocate to your AWS account and associate with an instance in your VPC.
+--> You can associate multiple private IPv4 addresses with an instance in a VPC.
+--> You can also assign IPv6 addresses to instances in a VPC.
+--> Each instance in a VPC can have one or more security groups associated with it.
+--> A security group acts as a virtual firewall that controls the inbound and outbound traffic for the   instance.
+----------------------------------------------
+
+#AWS security GROUPS:
+----------------------
+--> Security groups are stateful, meaning that if you allow an incoming request from a specific IP address and port, the response traffic is automatically allowed, regardless of outbound security group rules.
+--> You can specify allow rules, but not deny rules.
+--> You can associate multiple security groups with an instance.
+--> By default, a security group includes an outbound rule that allows all outbound traffic.
+--> You can modify the outbound rules to restrict outbound traffic as needed.
+--> You can create custom security groups to meet the specific security requirements of your applications.
+----------------------------------------------
+
+# Network ACLs:
+----------------------
+--> Network ACLs are stateless, meaning that return traffic must be explicitly allowed by rules.
+--> You can specify both allow and deny rules.
+--> Each subnet in your VPC must be associated with a network ACL.
+--> If you do not explicitly associate a subnet with a particular network ACL, the subnet is automatically associated with the default network ACL for the VPC.
+--> A network ACL contains a numbered list of rules that are evaluated in order, starting with the lowest numbered rule.
+--> Each rule specifies a protocol, a port range, a source or destination CIDR block, and whether to allow or deny the traffic.
+--> You can create custom network ACLs to meet the specific security requirements of your applications.
+----------------------------------------------
+
+# AWS NAT Gateway:
+----------------------
+--> A NAT gateway enables instances in a private subnet to connect to the internet or other AWS services, but prevents the internet from initiating a connection with those instances.
+--> A NAT gateway is highly available within an Availability Zone and is managed by AWS.
+--> You can create a NAT gateway in a public subnet and associate it with an Elastic IP address.
+--> You can then update the route table for your private subnet to direct internet-bound traffic to the NAT gateway.
+--> This allows instances in the private subnet to access the internet for software updates, patches, and other outbound communications, while still remaining inaccessible from the internet.
+----------------------------------------------
+
