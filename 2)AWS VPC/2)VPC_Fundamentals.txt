@@ -112,3 +112,25 @@
 --> This allows instances in the private subnet to access the internet for software updates, patches, and other outbound communications, while still remaining inaccessible from the internet.
 ----------------------------------------------
 
+#Eggress-Only Internet Gateway:
+----------------------
+--> An egress-only internet gateway is a horizontally scaled, redundant, and highly available VPC component that allows outbound communication over IPv6 from instances in your VPC to the internet, and prevents the internet from initiating an IPv6 connection with your instances.
+--> You can create an egress-only internet gateway and attach it to your VPC.
+--> You can then update the route table for your subnet to direct IPv6 internet-bound traffic to the egress-only internet gateway.
+--> This allows instances in your VPC to access the internet over IPv6 for software updates, patches, and other outbound communications, while still remaining inaccessible from the internet.
+----------------------------------------------
+
+# Elastic Network Interface(ENI):
+----------------------
+--> An elastic network interface (ENI) is a virtual network interface that you can attach to an instance in a VPC.
+--> An ENI can include the following attributes:
+   - A primary private IPv4 address from the IPv4 address range of the subnet.
+   - One or more secondary private IPv4 addresses.
+   - One Elastic IP address per private IPv4 address.
+   - One public IPv4 address.
+   - One or more IPv6 addresses.
+   - A MAC address.
+   - A source/destination check flag.
+   - One or more security groups.
+--> You can create and configure ENIs to meet the specific networking requirements of your applications.
+----------------------------------------------

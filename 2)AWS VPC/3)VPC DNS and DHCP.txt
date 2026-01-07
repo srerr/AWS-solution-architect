@@ -1,0 +1,15 @@
+# VPC DHCP Options Sets:
+-------------------------
+-> DHCP Options Sets allow you to configure DHCP options for your VPC, such as domain name servers, domain names, and NTP servers.
+-> You can create a custom DHCP options set and associate it with your VPC to override the default settings.    
+-> Common DHCP options include:
+   - Domain Name Servers: Specify custom DNS servers for instances in the VPC.
+   - Domain Name: Set a custom domain name for instances.
+   - NTP Servers: Specify Network Time Protocol servers for time synchronization.
+   - NetBIOS Name Servers and Node Type: Configure NetBIOS settings for Windows instances.  
+-> To create a DHCP options set, use the AWS Management Console, AWS CLI, or SDKs.
+-> After creating a DHCP options set, you can associate it with your VPC using the "AssociateDhcpOptions" action.
+-> If you do not associate a custom DHCP options set, the VPC will use the default DHCP options set provided by AWS.
+-> You can modify the DHCP options set associated with your VPC at any time, and the changes will take effect for all instances in the VPC.
+-> To view or manage DHCP options sets, navigate to the "DHCP Options Sets" section in the VPC dashboard of the AWS Management Console. 
+-------------------------
