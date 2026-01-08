@@ -13,3 +13,10 @@
 -> You can modify the DHCP options set associated with your VPC at any time, and the changes will take effect for all instances in the VPC.
 -> To view or manage DHCP options sets, navigate to the "DHCP Options Sets" section in the VPC dashboard of the AWS Management Console. 
 -------------------------
+
+1)create DHCP options set
+2)associate DHCP options set with VPC
+3)create aws route 53 private hosted zone
+4)associate private hosted zone with VPC
+5)configure instances to use custom DNS settings
+-------------------------
