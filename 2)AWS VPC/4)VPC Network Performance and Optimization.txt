@@ -1,1 +1,37 @@
-# 
+# Network Performance basics:
+-----------------------------
+->Bandwidth: The maximum rate of data transfer across a network path. In AWS, bandwidth can vary based on instance type, network configuration, and region.
+->Latency: The time it takes for a data packet to travel from source to destination. Lower latency is crucial for real-time applications.
+->Jitter: The variation in packet arrival times. High jitter can affect the quality of real-time communications.
+->Packet Loss: The percentage of packets that are lost during transmission. Minimizing packet loss is essential for maintaining data integrity.
+->throughput: The actual rate of successful data transfer over a network, often measured in bits per second (bps).
+->Packet per Second (PPS): A measure of how many packets are processed by a network device or system in one second.
+->Maximum Transmission Unit (MTU): The largest size of a packet that can be transmitted over a network. In AWS, the default MTU for VPCs is 1500 bytes, but it can be increased to 9001 bytes for enhanced networking.
+-----------------------------
+
+# Maximum Transmission Unit (MTU) in AWS VPC in different scenarios:
+----------------------------------------------
+-> Default MTU for AWS VPC: 1500 bytes.
+-> Jumbo Frames Support: AWS VPCs support jumbo frames with an MTU of up to 9001 bytes for enhanced networking.
+-> Enhanced Networking: To utilize jumbo frames, instances must be launched with enhanced networking capabilities, such as using the Elastic Network Adapter (ENA) or Intel 82599 Virtual Function (VF) interface.
+-> Inter-VPC Communication: When communicating between VPCs using VPC peering or AWS Transit Gateway, ensure that both VPCs are configured to support the same MTU settings to avoid fragmentation.
+-> VPN Connections: When using VPN connections, the effective MTU may be lower than the VPC MTU due to encapsulation overhead. It is recommended to adjust the MTU settings on instances accordingly.
+-> Direct Connect: AWS Direct Connect connections can support jumbo frames, but the MTU must be configured on both the AWS side and the customer side to ensure compatibility.
+-> Testing and Verification: Use tools like ping with the "Don't Fragment" (DF) flag to test and verify the MTU settings between instances in the VPC.
+----------------------------------------------
+
+# EC2 Network Optimization Techniques:
+--------------------------------
+1)cluster placement groups
+-> Cluster placement groups are designed to provide low-latency, high-bandwidth networking between instances by placing them physically close together within a single Availability Zone.
+-> Ideal for applications that require high network throughput and low latency, such as high-performance computing (HPC) and big data analytics.
+2)EBS optimized instances
+-> EBS-optimized instances provide dedicated bandwidth for Amazon EBS I/O, ensuring that network traffic between the instance and EBS volumes does not compete with other network traffic.
+-> This optimization is particularly beneficial for applications with high I/O requirements, such as databases and data warehousing.
+3)Enhanced networking
+-> Enhanced networking provides higher bandwidth, lower latency, and lower jitter by using single root I/O virtualization (SR-IOV) to deliver high-performance networking capabilities.
+-> To use enhanced networking, instances must be launched with compatible instance types and network interfaces, such as the Elastic Network Adapter (ENA) or Intel 82599 Virtual Function (VF) interface.
+4)Use of placement groups
+-> Placement groups allow you to influence the placement of a group of interdependent instances to meet the needs of your workload.
+-> There are three types of placement groups: Cluster, Spread, and Partition placement groups, each designed for different use cases and optimization strategies.
+----------------------------------------------
