@@ -35,3 +35,53 @@
 -> Placement groups allow you to influence the placement of a group of interdependent instances to meet the needs of your workload.
 -> There are three types of placement groups: Cluster, Spread, and Partition placement groups, each designed for different use cases and optimization strategies.
 ----------------------------------------------
+
+# Enhanced Networking in AWS:
+-------------------------------
+-> Enhanced networking provides higher bandwidth, lower latency, and lower jitter by using single root I/O virtualization (SR-IOV) to deliver high-performance networking capabilities.
+-> To use enhanced networking, instances must be launched with compatible instance types and network interfaces, such as the Elastic Network Adapter (ENA) or Intel 82599 Virtual Function (VF) interface.
+-> ENA is the preferred option for most modern instance types, offering support for higher bandwidths and lower latencies compared to the Intel 82599 VF interface.
+-> Enhanced networking is particularly beneficial for applications that require high network performance, such as big data analytics, high-performance computing (HPC), and real-time communications.
+-> To enable enhanced networking on an instance, ensure that the instance type supports it, and install the necessary drivers if required.
+-> You can verify if enhanced networking is enabled on an instance by checking the instance metadata or using the AWS CLI.
+->SR-IOV technology allows a single physical network device to be shared among multiple virtual instances, providing direct access to the network hardware and reducing overhead.   
+->PCI passthrough allows virtual machines to directly access physical hardware devices, improving performance by bypassing the hypervisor layer.    
+=> list of instances supporting Elastic Network Adapter (ENA):
+   - C5, C5d, C6g, C6gd, C6i, C6id, C7g
+   - M5, M5a, M5ad, M5n, M5dn, M6g, M6gd, M6i, M6id
+   - R5, R5a, R5ad, R5n, R5dn, R6g, R6gd, R6i, R6id
+   - P3dn.24xlarge
+   - Inf1
+   - G4ad, G4dn
+   - I3en
+   - Z1d
+   - F1
+   - VT1
+=> list of instances supporting Intel 82599 Virtual Function (VF) interface:
+   - C3
+   - C4
+   - G2
+   - I2
+   - M4
+   - R3
+   - R4
+   - T2
+=> how to check: ethtool -i <network-interface>
+=> list of AMI'S that support enhanced networking:
+   - Amazon Linux 2
+   - Ubuntu 16.04 and later
+   - Red Hat Enterprise Linux 7.4 and later
+   - SUSE Linux Enterprise Server 12 SP2 and later
+   - Windows Server 2016 and later  
+-------------------------------
+
+# DPDK (Data Plane Development Kit) And Elastic Fabric Adapter (EFA) in AWS:
+----------------------------------------------
+-> DPDK is a set of libraries and drivers that enable high-performance packet processing in user space, bypassing the kernel network stack.
+-> DPDK is used in AWS to optimize network performance for applications that require low latency and high throughput, such as telecommunications and financial services.
+-> EFA is a network interface for Amazon EC2 instances that provides low-latency, high-bandwidth networking capabilities, specifically designed for HPC and machine learning applications.
+-> EFA leverages DPDK to achieve high performance by allowing applications to directly access the network interface, reducing latency and increasing throughput.
+-> EFA supports features such as RDMA (Remote Direct Memory Access) and OS bypass, which further enhance network performance for distributed applications.
+-> To use EFA, instances must be launched with compatible instance types and the EFA-enabled AMI.
+-> EFA is particularly beneficial for applications that require high-performance networking, such as HPC workloads, distributed machine learning training, and large-scale simulations.
+----------------------------------------------
