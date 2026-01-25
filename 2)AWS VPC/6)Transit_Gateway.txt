@@ -1,0 +1,19 @@
+# AWS Transit GateWay:
+    => AWS Transit Gateway is a network transit hub that you can use to interconnect your VPCs and on-premises networks.
+    => It acts as a central hub for routing traffic between multiple VPCs and on-premises networks, simplifying network architecture and management.
+    => Transit Gateway supports thousands of VPCs and on-premises connections, making it suitable for large-scale deployments.
+    => It provides high availability and scalability, allowing you to easily add or remove VPCs and on-premises connections as needed.
+    => Transit Gateway supports both IPv4 and IPv6 traffic, as well as multicast traffic for applications that require it.
+    => It integrates with AWS Direct Connect and VPN connections, enabling secure communication between your on-premises networks and AWS resources.
+    => Transit Gateway is charged based on the number of attachments (VPCs and on-premises connections) and the amount of data processed through the gateway.
+
+    # Transit Gateway VPC attachments and routing:
+    ----------------------------------------------
+        => To connect a VPC to a Transit Gateway, you create a Transit Gateway VPC attachment.
+        => Each attachment represents a connection between the Transit Gateway and a specific VPC.
+        => You can create multiple attachments for different VPCs, allowing them to communicate with each other through the Transit Gateway.
+        => Once the attachment is created, you need to update the route tables in both the Transit Gateway and the VPCs to enable traffic flow.
+        => In the Transit Gateway route table, you add routes that direct traffic to the appropriate VPC attachments based on destination CIDR blocks.
+        => In the VPC route tables, you add routes that direct traffic destined for other VPCs or on-premises networks to the Transit Gateway attachment.
+        => This routing configuration allows seamless communication between connected VPCs and on-premises networks through the Transit Gateway.    
+
