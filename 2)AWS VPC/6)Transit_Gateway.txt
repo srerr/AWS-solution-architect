@@ -17,3 +17,12 @@
         => In the VPC route tables, you add routes that direct traffic destined for other VPCs or on-premises networks to the Transit Gateway attachment.
         => This routing configuration allows seamless communication between connected VPCs and on-premises networks through the Transit Gateway.    
 
+    # Transit Gateway Peering:
+    ------------------------------
+        => Transit Gateway peering allows you to connect Transit Gateways in different AWS Regions.
+        => This enables communication between VPCs and on-premises networks connected to different Transit Gateways.
+        => To establish a peering connection, you create a Transit Gateway peering attachment between the two Transit Gateways.
+        => Once the peering attachment is created, you need to update the route tables in both Transit Gateways to enable traffic flow.
+        => In each Transit Gateway route table, you add routes that direct traffic to the peering attachment based on destination CIDR blocks.  
+        => This routing configuration allows seamless communication between VPCs and on-premises networks connected to different Transit Gateways across regions.   
+        
