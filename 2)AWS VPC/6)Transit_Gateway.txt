@@ -65,4 +65,13 @@
         => In the Transit Gateway route table, you add routes that direct multicast traffic to the appropriate VPC attachments based on destination multicast addresses.
         => In the VPC route tables, you add routes that direct multicast traffic destined for other VPCs to the Transit Gateway multicast domain.   
         => This routing configuration allows seamless multicast communication between connected VPCs through the Transit Gateway.   
-        
+
+    # use cases of Transit Gateway:
+    -------------------------------------
+        => Centralized network management: Transit Gateway simplifies the management of multiple VPCs and on-premises networks by providing a single point of connectivity.
+        => Scalable network architecture: Transit Gateway supports thousands of VPCs and on-premises connections, making it suitable for large-scale deployments.   
+        => Inter-region connectivity: Transit Gateway peering allows you to connect Transit Gateways in different AWS Regions, enabling communication between VPCs and on-premises networks across regions.
+        => Integration with third-party appliances: Transit Gateway Connect attachment enables integration with virtual network appliances, such as firewalls or WAN optimizers, deployed in your VPCs.
+        => Secure on-premises connectivity: Transit Gateway VPN attachment allows you to connect your Transit Gateway to on-premises networks using VPN connections, enabling secure communication between your on-premises networks and AWS resources.
+        => Dedicated network connection: Transit Gateway integration with AWS Direct Connect provides a dedicated network connection between your on-premises
+        => data center and AWS, allowing you to connect multiple VPCs and on-premises networks to a single Direct Connect connection through the Transit Gateway.
