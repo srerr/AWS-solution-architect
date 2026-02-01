@@ -75,3 +75,4 @@
         => Secure on-premises connectivity: Transit Gateway VPN attachment allows you to connect your Transit Gateway to on-premises networks using VPN connections, enabling secure communication between your on-premises networks and AWS resources.
         => Dedicated network connection: Transit Gateway integration with AWS Direct Connect provides a dedicated network connection between your on-premises
         => data center and AWS, allowing you to connect multiple VPCs and on-premises networks to a single Direct Connect connection through the Transit Gateway.
+
