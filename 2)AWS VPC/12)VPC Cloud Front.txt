@@ -67,4 +67,17 @@
     => Lambda@Edge: Lambda@Edge is a feature of AWS Lambda that allows you to run Lambda functions at CloudFront edge locations. With Lambda@Edge, you can execute more complex logic than what is possible with CloudFront Functions, such as modifying request and response bodies, performing A/B testing, or implementing advanced authentication and authorization mechanisms. Lambda@Edge functions are triggered by specific events in the CloudFront request/response lifecycle, allowing you to customize the behavior of your distributions in real-time.
     => By using CloudFront Functions and Lambda@Edge, you can enhance the functionality of your CloudFront distributions and create a more personalized and dynamic content delivery experience for your users. These features provide flexibility and power to customize how your content is delivered while maintaining high performance and scalability. 
     => Overall, CloudFront Functions and Lambda@Edge are valuable tools that can help you to optimize your content delivery and create a more engaging experience for your users by allowing you to run custom code at the edge locations of CloudFront.    
+
+
+# AWS Global Accelerator and CloudFront:
+    => AWS Global Accelerator is a service that improves the availability and performance of your applications by routing traffic through the AWS global network. 
+    =>It provides static IP addresses that act as a fixed entry point to your applications, allowing you to route traffic to optimal endpoints based on health, geography, and policies you define. 
+    =>When used in conjunction with CloudFront, Global Accelerator can help to further enhance the performance and reliability of your content delivery by providing an additional layer of routing optimization and failover capabilities. 
+    =>By using Global Accelerator with CloudFront, you can ensure that your users experience low latency and high availability when accessing your content, regardless of their location.   
+    => Overall, AWS Global Accelerator can complement CloudFront by providing improved routing and availability for your applications, ensuring that your users have a seamless experience when accessing your content through CloudFront.
+
+# Unicast IP VS Anycast IP:
+    => Unicast IP: A unicast IP address is a unique identifier assigned to a single network interface. It is used for one-to-one communication, where data is sent from one source to one destination. In a unicast communication, the sender specifies the exact IP address of the recipient, and the data is delivered directly to that specific address.
+    => Anycast IP: An anycast IP address is a single IP address that can be assigned to multiple network interfaces across different locations. It is used for one-to-many communication, where data is sent from one source to the nearest destination among a group of potential recipients. In an anycast communication, the sender sends data to the anycast IP address, and the network routes the data to the nearest instance that has that anycast IP address assigned.
+    => The main difference between unicast and anycast IP addresses is in their communication patterns. Unicast is used for direct communication between two specific endpoints, while anycast allows for routing to the nearest available endpoint among a group of potential recipients. Anycast can help improve performance and availability by directing traffic to the closest instance, while unicast provides a more direct and specific communication path.    
     
