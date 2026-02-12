@@ -1,2 +1,23 @@
 # VPC Cloud Front:
 -----------------
+    => CloudFront is a content delivery network (CDN) service provided by AWS that allows you to distribute content globally with low latency and high transfer speeds. When you use CloudFront, your content is cached at edge locations around the world, which helps to improve the performance of your applications and reduce the load on your origin servers. 
+    => CloudFront can be used in conjunction with Amazon S3, Amazon EC2, and other AWS services to deliver content to end-users. It supports various types of content, including static and dynamic content, streaming media, and APIs.
+    => CloudFront also provides features such as SSL/TLS encryption, access control, and real-time metrics and logging, which can help you to secure and monitor your content delivery. 
+    => To use CloudFront, you need to create a distribution, which is a collection of edge locations that will cache and deliver your content. You can specify the origin of your content, such as an S3 bucket or an EC2 instance, and configure various settings such as caching behavior, security, and access control. 
+    => Once your distribution is created, you can use the CloudFront domain name to access your content, and CloudFront will automatically route requests to the nearest edge location for optimal performance. You can also use your own custom domain name with CloudFront by configuring a CNAME record in your DNS settings. 
+    => Overall, CloudFront is a powerful and flexible CDN service that can help you to improve the performance and scalability of your applications while reducing costs and improving security.    
+    => CloudFront can be used in conjunction with Amazon S3, Amazon EC2, and other AWS services to deliver content to end-users. It supports various types of content, including static and dynamic content, streaming media, and APIs.
+    => CloudFront also provides features such as SSL/TLS encryption, access control, and real-time metrics and logging, which can help you to secure and monitor your content delivery. 
+    => To use CloudFront, you need to create a distribution, which is a collection of edge locations that will cache and deliver your content. You can specify the origin of your content, such as an S3 bucket or an EC2 instance, and configure various settings such as caching behavior, security, and access control. 
+    => Once your distribution is created, you can use the CloudFront domain name to access your content, and CloudFront will automatically route requests to the nearest edge location for optimal performance. You can also use your own custom domain name with CloudFront by configuring a CNAME record in your DNS settings. 
+    => Overall, CloudFront is a powerful and flexible CDN service that can help you to improve the performance and scalability of your applications while reducing costs and improving security.    
+
+    # CloudFront Components:
+    => Distribution: A distribution is a collection of edge locations that will cache and deliver your content. You can create a distribution for your content and specify the origin of your content, such as an S3 bucket or an EC2 instance.
+    => Edge Locations: Edge locations are data centers located around the world that cache and deliver your content to end-users. CloudFront automatically routes requests to the nearest edge location for optimal performance.
+    => Origins: An origin is the source of your content, such as an S3 bucket or an EC2 instance. You can specify one or more origins for your distribution, and CloudFront will route requests to the appropriate origin based on the caching behavior and other settings you configure.
+    => Behaviors: Behaviors are rules that you can configure to specify how CloudFront should handle requests for your content. You can specify caching behavior, security settings, and access control for each behavior.
+    => SSL/TLS: CloudFront supports SSL/TLS encryption for secure content delivery. You can use AWS Certificate Manager (ACM) to create and manage SSL/TLS certificates for your CloudFront distributions.
+    => Access Control: CloudFront provides various access control options, such as signed URLs and signed cookies, to restrict access to your content. You can also use AWS Identity and Access Management (IAM) to manage permissions for your CloudFront distributions.
+    => Real-Time Metrics and Logging: CloudFront provides real-time metrics and logging to help you monitor the performance and usage of your distributions. You can use Amazon CloudWatch to view metrics and set alarms, and you can use Amazon S3 to store and analyze your CloudFront logs. 
+    
