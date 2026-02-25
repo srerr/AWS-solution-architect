@@ -1,0 +1,8 @@
+# AWS Organizations:
+--------------------
+    -> AWS Organizations is a service that enables you to centrally manage and govern multiple AWS accounts within your organization. It provides a way to create and manage accounts, apply policies, and consolidate billing across those accounts.
+    -> With AWS Organizations, you can create organizational units (OUs) to group accounts based on your business needs. This allows you to apply policies and manage permissions at the OU level, making it easier to enforce governance and compliance across your organization.
+    -> AWS Organizations supports service control policies (SCPs), which are a type of policy that allow you to define the maximum permissions for accounts within your organization. SCPs help you ensure that accounts adhere to your organization's security and compliance requirements.
+    -> The service also provides consolidated billing, allowing you to combine the usage and costs of multiple accounts into a single bill. This can help you take advantage of volume discounts and simplify the billing process.
+    -> By using AWS Organizations, you can streamline the management of your AWS environment, improve security and compliance, and optimize costs across multiple accounts.
+----------------
