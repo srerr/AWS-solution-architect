@@ -1,0 +1,9 @@
+# AWS Control Tower:
+----------------------
+    -> AWS Control Tower is a service that provides a pre-configured landing zone for your AWS environment, allowing you to set up and govern a secure, multi-account AWS environment based on best practices.
+    -> It offers a set of pre-defined blueprints and guardrails that help you establish a secure and compliant AWS environment, while also providing automation and governance features to simplify management.
+    -> With AWS Control Tower, you can quickly set up a multi-account environment with pre-configured security and compliance controls, such as identity and access management, logging, and monitoring. 
+    -> The service also provides a dashboard that allows you to monitor the health and compliance of your AWS environment, and receive alerts when any issues are detected.
+    -> AWS Control Tower integrates with AWS Organizations, allowing you to manage and govern multiple accounts within your organization using the pre-configured landing zone. 
+    -> By using AWS Control Tower, you can accelerate the setup of your AWS environment, improve security and compliance, and simplify the management of your multi-account AWS environment.    
+    

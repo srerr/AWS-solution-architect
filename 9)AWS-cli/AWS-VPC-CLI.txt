@@ -1,0 +1,269 @@
+#importent VPC CLI commands:
+----------------------------
+1)Create VPC:
+    -->aws ec2 create-vpc --cidr-block <CIDR-block>
+    -->aws ec2 create-vpc --cidr-block 10.0.0.0/16
+2)Describe VPC:
+    -->aws ec2 describe-vpcs
+3)Delete VPC:
+    -->aws ec2 delete-vpc --vpc-id <vpc-id>
+    -->aws ec2 delete-vpc --vpc-id vpc-0abcd1234efgh5678
+4)Create Subnet:
+    -->aws ec2 create-subnet --vpc-id <vpc-id> --cidr-block <CIDR-block>
+    -->aws ec2 create-subnet --vpc-id vpc-0abcd1234efgh5678 --cidr-block 10.0.1.0/24    
+5)Describe Subnet:
+    -->aws ec2 describe-subnets --subnet-ids <subnet-id>    
+    -->aws ec2 describe-subnets --subnet-ids subnet-0abcd1234efgh5678
+6)Delete Subnet:
+    -->aws ec2 delete-subnet --subnet-id <subnet-id>
+    -->aws ec2 delete-subnet --subnet-id subnet-0abcd1234efgh5678
+7)Create Internet Gateway:
+    -->aws ec2 create-internet-gateway  
+8)Describe Internet Gateway:
+    -->aws ec2 describe-internet-gateways --internet-gateway-ids <igw-id>
+    -->aws ec2 describe-internet-gateways --internet-gateway-ids igw-0abcd1234efgh5678
+9)Attach Internet Gateway to VPC:
+    -->aws ec2 attach-internet-gateway --internet-gateway-id <igw-id> --vpc-id <vpc-id>
+    -->aws ec2 attach-internet-gateway --internet-gateway-id igw-0abcd1234efgh5678 --vpc-id vpc-0abcd1234efgh5678
+10)Detach Internet Gateway from VPC:
+    -->aws ec2 detach-internet-gateway --internet-gateway-id <igw-id> --vpc-id <vpc-id>
+    -->aws ec2 detach-internet-gateway --internet-gateway-id igw-0abcd1234efgh5678 --vpc-id vpc-0abcd1234efgh5678
+11)Delete Internet Gateway:
+    -->aws ec2 delete-internet-gateway --internet-gateway-id <igw-id>
+    -->aws ec2 delete-internet-gateway --internet-gateway-id igw-0abcd1234efgh5678  
+12)Create Route Table:
+    -->aws ec2 create-route-table --vpc-id <vpc-id>
+    -->aws ec2 create-route-table --vpc-id vpc-0abcd1234efgh5678    
+13)Describe Route Table:
+    -->aws ec2 describe-route-tables --route-table-ids <rtb-id>
+    -->aws ec2 describe-route-tables --route-table-ids rtb-0abcd1234efgh5678    
+14)Delete Route Table:
+    -->aws ec2 delete-route-table --route-table-id <rtb-id>
+    -->aws ec2 delete-route-table --route-table-id rtb-0abcd1234efgh5678    
+15)Create Route in Route Table:
+    -->aws ec2 create-route --route-table-id <rtb-id> --destination-cidr-block <CIDR-block> --gateway-id <igw-id>
+    -->aws ec2 create-route --route-table-id rtb-0abcd1234efgh5678 --destination-cidr-block 0.0.0.0/0 --gateway-id igw-0abcd1234efgh5678    
+16)Associate Route Table with Subnet:
+    -->aws ec2 associate-route-table --route-table-id <rtb-id> --subnet-id <subnet-id>
+    -->aws ec2 associate-route-table --route-table-id rtb-0abcd1234efgh5678 --subnet-id subnet-0abcd1234efgh5678    
+17)Disassociate Route Table from Subnet:
+    -->aws ec2 disassociate-route-table --association-id <association-id>
+    -->aws ec2 disassociate-route-table --association-id rtbassoc-0abcd1234efgh5678 
+18)Create Security Group:
+    -->aws ec2 create-security-group --group-name <group-name> --description <description> --vpc-id <vpc-id>
+    -->aws ec2 create-security-group --group-name my-sg --description "My security group" --vpc-id vpc-0abcd1234efgh5678    
+19)Describe Security Group:
+    -->aws ec2 describe-security-groups --group-ids <sg-id>
+    -->aws ec2 describe-security-groups --group-ids sg-0abcd1234efgh5678    
+20)Delete Security Group:
+    -->aws ec2 delete-security-group --group-id <sg-id>
+    -->aws ec2 delete-security-group --group-id sg-0abcd1234efgh5678    
+21)Authorize Inbound Rule in Security Group:
+    -->aws ec2 authorize-security-group-ingress --group-id <sg-id> --protocol <protocol> --port <port> --cidr <CIDR-block>
+    -->aws ec2 authorize-security-group-ingress --group-id sg-0abcd1234efgh5678 --protocol tcp --port 22 --cidr 0.0.0.0/0   
+22)Revoke Inbound Rule in Security Group:
+    -->aws ec2 revoke-security-group-ingress --group-id <sg-id> --protocol <protocol> --port <port> --cidr <CIDR-block>
+    -->aws ec2 revoke-security-group-ingress --group-id sg-0abcd1234efgh5678 --protocol tcp --port 22 --cidr 0.0.0.0/0  
+23)Authorize Outbound Rule in Security Group:
+    -->aws ec2 authorize-security-group-egress --group-id <sg-id> --protocol <protocol> --port <port> --cidr <CIDR-block>
+    -->aws ec2 authorize-security-group-egress --group-id sg-0abcd1234efgh5678 --protocol tcp --port 80 --cidr 0.0.0.0/0    
+24)Revoke Outbound Rule in Security Group:
+    -->aws ec2 revoke-security-group-egress --group-id <sg-id> --protocol <protocol> --port <port> --cidr <CIDR-block>
+    -->aws ec2 revoke-security-group-egress --group-id sg-0abcd1234efgh5678 --protocol tcp --port 80 --cidr 0.0.0.0/0   
+25)Create Network ACL:
+    -->aws ec2 create-network-acl --vpc-id <vpc-id>
+    -->aws ec2 create-network-acl --vpc-id vpc-0abcd1234efgh5678
+26)Describe Network ACL:
+    -->aws ec2 describe-network-acls --network-acl-ids <acl-id>
+    -->aws ec2 describe-network-acls --network-acl-ids acl-0abcd1234efgh5678
+27)Delete Network ACL:
+    -->aws ec2 delete-network-acl --network-acl-id <acl-id>
+    -->aws ec2 delete-network-acl --network-acl-id acl-0abcd1234efgh5678
+28)Create Inbound Rule in Network ACL:
+    -->aws ec2 create-network-acl-entry --network-acl-id <acl-id> --rule-number <rule-number> --protocol <protocol> --port-range <port-range> --cidr-block <CIDR-block> --egress | --ingress
+    -->aws ec2 create-network-acl-entry --network-acl-id acl-0abcd1234efgh5678 --rule-number 100 --protocol tcp --port-range 22 --cidr-block 0.0.0.0/0 --ingress
+29)Delete Inbound Rule in Network ACL:
+    -->aws ec2 delete-network-acl-entry --network-acl-id <acl-id> --rule-number <rule-number> --ingress
+    -->aws ec2 delete-network-acl-entry --network-acl-id acl-0abcd1234efgh5678 --rule-number 100 --ingress
+30)Create Outbound Rule in Network ACL:
+    -->aws ec2 create-network-acl-entry --network-acl-id <acl-id> --rule-number <rule-number> --protocol <protocol> --port-range <port-range> --cidr-block <CIDR-block> --egress | --ingress
+    -->aws ec2 create-network-acl-entry --network-acl-id acl-0abcd1234efgh5678 --rule-number 100 --protocol tcp --port-range 80 --cidr-block 0.0.0.0/0 --egress
+31)Delete Outbound Rule in Network ACL:
+    -->aws ec2 delete-network-acl-entry --network-acl-id <acl-id> --rule-number <rule-number> --egress
+    -->aws ec2 delete-network-acl-entry --network-acl-id acl-0abcd1234efgh5678 --rule-number 100 --egress       
+32)Associate Network ACL with Subnet:
+    -->aws ec2 associate-network-acl --network-acl-id <acl-id> --subnet-id <subnet-id>
+    -->aws ec2 associate-network-acl --network-acl-id acl-0abcd1234efgh5678 --subnet-id subnet-0abcd1234efgh5678
+33)Disassociate Network ACL from Subnet:
+    -->aws ec2 disassociate-network-acl --association-id <association-id>
+    -->aws ec2 disassociate-network-acl --association-id aclassoc-0abcd1234efgh5678 
+34)Create VPC Endpoint:
+    -->aws ec2 create-vpc-endpoint --vpc-id <vpc-id> --service-name <service-name> --vpc-endpoint-type <type> --subnet-ids <subnet-id1> <subnet-id2> --security-group-ids <sg-id>
+    -->aws ec2 create-vpc-endpoint --vpc-id vpc-0abcd1234efgh5678 --service-name com.amazonaws.us-east-1.s3 --vpc-endpoint-type Gateway --subnet-ids subnet-0abcd1234efgh5678 subnet-1abcd1234efgh5678 --security-group-ids sg-0abcd1234efgh5678
+35)Describe VPC Endpoint:
+    -->aws ec2 describe-vpc-endpoints --vpc-endpoint-ids <endpoint-id>
+    -->aws ec2 describe-vpc-endpoints --vpc-endpoint-ids vpce-0abcd1234efgh5678 
+36)Delete VPC Endpoint:
+    -->aws ec2 delete-vpc-endpoints --vpc-endpoint-ids <endpoint-id>
+    -->aws ec2 delete-vpc-endpoints --vpc-endpoint-ids vpce-0abcd1234efgh5678
+37)Create VPC Peering Connection:
+    -->aws ec2 create-vpc-peering-connection --vpc-id <vpc-id1> --peer-vpc-id <vpc-id2>
+    -->aws ec2 create-vpc-peering-connection --vpc-id vpc-0abcd1234efgh5678 --peer-vpc-id vpc-1abcd1234efgh5678 
+38)Describe VPC Peering Connection:
+    -->aws ec2 describe-vpc-peering-connections --vpc-peering-connection-ids <peering-id>
+    -->aws ec2 describe-vpc-peering-connections --vpc-peering-connection-ids pcx-0abcd1234efgh5678 
+39)Accept VPC Peering Connection:
+    -->aws ec2 accept-vpc-peering-connection --vpc-peering-connection-id <peering-id>
+    -->aws ec2 accept-vpc-peering-connection --vpc-peering-connection-id pcx-0abcd1234efgh5678  
+40)Delete VPC Peering Connection:
+    -->aws ec2 delete-vpc-peering-connection --vpc-peering-connection-id <peering-id>
+    -->aws ec2 delete-vpc-peering-connection --vpc-peering-connection-id pcx-0abcd1234efgh5678
+41)Create VPC Flow Logs:
+    -->aws ec2 create-flow-logs --resource-type VPC --resource-id <vpc-id> --traffic-type <type> --log-group-name <log-group> --deliver-logs-permission-arn <iam-role-arn>
+    -->aws ec2 create-flow-logs --resource-type VPC --resource-id vpc-0abcd1234efgh5678 --traffic-type ALL --log-group-name my-log-group --deliver-logs-permission-arn arn:aws:iam::123456789012:role/flow-logs-role    
+42)Describe VPC Flow Logs:
+    -->aws ec2 describe-flow-logs --filter Name=resource-id,Values=<vpc-id>
+    -->aws ec2 describe-flow-logs --filter Name=resource-id,Values=vpc-0abcd1234efgh5678
+43)Delete VPC Flow Logs:
+    -->aws ec2 delete-flow-logs --flow-log-ids <flow-log-id>
+    -->aws ec2 delete-flow-logs --flow-log-ids fl-0abcd1234efgh5678 
+44)Modify VPC Attribute:
+    -->aws ec2 modify-vpc-attribute --vpc-id <vpc-id> --enable-dns-support | --no-enable-dns-support
+    -->aws ec2 modify-vpc-attribute --vpc-id vpc-0abcd1234efgh5678 --enable-dns-support 
+    -->aws ec2 modify-vpc-attribute --vpc-id <vpc-id> --enable-dns-hostnames | --no-enable-dns-hostnames
+    -->aws ec2 modify-vpc-attribute --vpc-id vpc-0abcd1234efgh5678 --enable-dns-hostnames
+45)Describe VPC Attribute:
+    -->aws ec2 describe-vpc-attribute --vpc-id <vpc-id> --attribute <attribute>
+    -->aws ec2 describe-vpc-attribute --vpc-id vpc-0abcd1234efgh5678 --attribute enableDnsSupport
+    -->aws ec2 describe-vpc-attribute --vpc-id vpc-0abcd1234efgh5678 --attribute enableDnsHostnames 
+46)Create DHCP Options Set:
+    -->aws ec2 create-dhcp-options --dhcp-configurations <key1=value1,key2=value2,...>
+    -->aws ec2 create-dhcp-options --dhcp-configurations "Key=domain-name,Values=example.com" "Key=domain-name-servers,Values=AmazonProvidedDNS"    
+47)Describe DHCP Options Set:
+    -->aws ec2 describe-dhcp-options --dhcp-options-ids <dhcp-id>
+    -->aws ec2 describe-dhcp-options --dhcp-options-ids dopt-0abcd1234efgh5678 
+48)Delete DHCP Options Set:
+    -->aws ec2 delete-dhcp-options --dhcp-options-id <dhcp-id>
+    -->aws ec2 delete-dhcp-options --dhcp-options-id dopt-0abcd1234efgh5678 
+49)Associate DHCP Options Set with VPC:
+    -->aws ec2 associate-dhcp-options --dhcp-options-id <dhcp-id>   
+    -->aws ec2 associate-dhcp-options --dhcp-options-id dopt-0abcd1234efgh5678 --vpc-id vpc-0abcd1234efgh5678
+50)Describe VPCs with specific DHCP Options Set:    
+    -->aws ec2 describe-vpcs --filter Name=dhcp-options-id,Values=<dhcp-id>
+    -->aws ec2 describe-vpcs --filter Name=dhcp-options-id,Values=dopt-0abcd1234efgh5678
+51)Create Elastic IP Address:
+    -->aws ec2 allocate-address --domain vpc    
+52)Describe Elastic IP Address:
+    -->aws ec2 describe-addresses --allocation-ids <allocation-id>
+    -->aws ec2 describe-addresses --allocation-ids eipalloc-0abcd1234efgh5678       
+53)Release Elastic IP Address:
+    -->aws ec2 release-address --allocation-id <allocation-id>
+    -->aws ec2 release-address --allocation-id eipalloc-0abcd1234efgh5678   
+54)Associate Elastic IP Address with Instance or Network Interface:
+    -->aws ec2 associate-address --instance-id <instance-id> --allocation-id <allocation-id>
+    -->aws ec2 associate-address --instance-id i-0abcd1234efgh5678 --allocation-id eipalloc-0abcd1234efgh5678
+    -->aws ec2 associate-address --network-interface-id <network-interface-id> --allocation-id <allocation-id>
+    -->aws ec2 associate-address --network-interface-id eni-0abcd1234efgh5678 --allocation-id eipalloc-0abcd1234efgh5678
+55)Disassociate Elastic IP Address:
+    -->aws ec2 disassociate-address --association-id <association-id>
+    -->aws ec2 disassociate-address --association-id eipassoc-0abcd1234efgh5678
+56)Create VPN Connection:
+    -->aws ec2 create-vpn-connection --type <type> --customer-gateway-id <cgw-id> --vpn-gateway-id <vgw-id>
+    -->aws ec2 create-vpn-connection --type ipsec.1 --customer-gateway-id cgw-0abcd1234efgh5678 --vpn-gateway-id vgw-0abcd1234efgh5678  
+57)Describe VPN Connection:
+    -->aws ec2 describe-vpn-connections --vpn-connection-ids <vpn-id>
+    -->aws ec2 describe-vpn-connections --vpn-connection-ids vpn-0abcd1234efgh5678
+58)Delete VPN Connection:
+    -->aws ec2 delete-vpn-connection --vpn-connection-id <vpn-id>
+    -->aws ec2 delete-vpn-connection --vpn-connection-id vpn-0abcd1234efgh5678  
+59)Create Customer Gateway:
+    -->aws ec2 create-customer-gateway --type <type> --public-ip <ip-address> --bgp-asn <asn>
+    -->aws ec2 create-customer-gateway --type ipsec.1 --public-ip <ip-address> --bgp-asn <asn>  
+60)Describe Customer Gateway:
+    -->aws ec2 describe-customer-gateways --customer-gateway-ids <cgw-id>
+    -->aws ec2 describe-customer-gateways --customer-gateway-ids cgw-0abcd1234efgh5678
+61)Delete Customer Gateway:
+    -->aws ec2 delete-customer-gateway --customer-gateway-id <cgw-id>
+    -->aws ec2 delete-customer-gateway --customer-gateway-id cgw-0abcd1234efgh5678  
+62)Create VPN Gateway:
+    -->aws ec2 create-vpn-gateway --type <type> --amazon-side-asn <asn>
+    -->aws ec2 create-vpn-gateway --type ipsec.1 --amazon-side  -asn 64512
+63)Describe VPN Gateway:
+    -->aws ec2 describe-vpn-gateways --vpn-gateway-ids <vgw-id>
+    -->aws ec2 describe-vpn-gateways --vpn-gateway-ids vgw-0abcd1234efgh5678    
+64)Delete VPN Gateway:
+    -->aws ec2 delete-vpn-gateway --vpn-gateway-id <vgw-id>
+    -->aws ec2 delete-vpn-gateway --vpn-gateway-id vgw-0abcd1234efgh5678  
+65)Attach VPN Gateway to VPC:
+    -->aws ec2 attach-vpn-gateway --vpn-gateway-id <vgw-id> --vpc-id <vpc-id>
+    -->aws ec2 attach-vpn-gateway --vpn-gateway-id vgw-0abcd1234efgh5678 --vpc-id vpc-0abcd1234efgh5678     
+66)Detach VPN Gateway from VPC:
+    -->aws ec2 detach-vpn-gateway --vpn-gateway-id <vgw-id> --vpc-id <vpc-id>
+    -->aws ec2 detach-vpn-gateway --vpn-gateway-id vgw-0abcd1234efgh5678 --vpc-id vpc-0abcd1234efgh5678     
+67)Create Transit Gateway:
+    -->aws ec2 create-transit-gateway --description <description> --options AmazonSideAsn=<asn>
+    -->aws ec2 create-transit-gateway --description "My transit gateway" --options AmazonSideAsn=64512  
+68)Describe Transit Gateway:
+    -->aws ec2 describe-transit-gateways --transit-gateway-ids <tgw-id>
+    -->aws ec2 describe-transit-gateways --transit-gateway-ids tgw-0abcd1234efgh5678    
+69)Delete Transit Gateway:
+    -->aws ec2 delete-transit-gateway --transit-gateway-id <tgw-id>
+    -->aws ec2 delete-transit-gateway --transit-gateway-id tgw-0abcd1234efgh5678  
+70)Create Transit Gateway Attachment:
+    -->aws ec2 create-transit-gateway-attachment --transit-gateway-id <tgw-id> --vpc-id <vpc-id> --subnet-ids <subnet-id1> <subnet-id2>
+    -->aws ec2 create-transit-gateway-attachment --transit-gateway-id tgw-0abcd1234efgh5678 --vpc-id vpc-0abcd1234efgh5678 --subnet-ids subnet-0abcd1234efgh5678 subnet-1abcd1234efgh5678    
+71)Describe Transit Gateway Attachment:
+    -->aws ec2 describe-transit-gateway --transit-gateway-attachment-ids <attachment-id>
+    -->aws ec2 describe-transit-gateway --transit-gateway-attachment-ids tgw-attach-0abcd1234efgh5678    
+72)Delete Transit Gateway Attachment:
+    -->aws ec2 delete-transit-gateway-attachment --transit-gateway-attachment-id <attachment-id>
+    -->aws ec2 delete-transit-gateway-attachment --transit-gateway-attachment-id tgw-attach-0abcd1234efgh5678   
+73)Create Transit Gateway Route Table:
+    -->aws ec2 create-transit-gateway-route-table --transit-gateway-id <tgw-id>
+    -->aws ec2 create-transit-gateway-route-table --transit-gateway-id tgw-0abcd1234efgh5678    
+74)Describe Transit Gateway Route Table:
+    -->aws ec2 describe-transit-gateway-route-tables --transit-gateway-route-table-ids <route-table-id>
+    -->aws ec2 describe-transit-gateway-route-tables --transit-gateway-route-table-ids tgw-rtb-0abcd1234efgh5678    
+75)Delete Transit Gateway Route Table:
+    -->aws ec2 delete-transit-gateway-route-table --transit-gateway-route-table-id <route-table-id>
+    -->aws ec2 delete-transit-gateway-route-table --transit-gateway-route-table-id tgw-rtb-0abcd1234efgh5678    
+76)Create Transit Gateway Route:
+    -->aws ec2 create-transit-gateway-route --transit-gateway-route-table-id <route-table-id> --destination-cidr-block <CIDR-block> --transit-gateway-attachment-id <attachment-id>
+    -->aws ec2 create-transit-gateway-route --transit-gateway-route-table-id tgw-rtb-0abcd1234efgh5678 --destination-cidr-block 10.0.0.0/16 --transit-gateway-attachment-id tgw-attach-0abcd1234efgh5678    
+77)Delete Transit Gateway Route:
+    -->aws ec2 delete-transit-gateway-route --transit-gateway-route-table-id <route-table-id> --destination-cidr-block <CIDR-block>
+    -->aws ec2 delete-transit-gateway-route --transit-gateway-route-table-id tgw-rtb-0abcd1234efgh5678 --destination-cidr-block 10.0.0.0/16 
+78)Associate Transit Gateway Route Table with Attachment:
+    -->aws ec2 associate-transit-gateway-route-table --transit-gateway-route-table-id <route-table-id> --transit-gateway-attachment-id <attachment-id>
+    -->aws ec2 associate-transit-gateway-route-table --transit-gateway-route-table-id tgw-rtb-0abcd1234efgh5678 --transit-gateway-attachment-id tgw-attach-0abcd1234efgh5678    
+79)Disassociate Transit Gateway Route Table from Attachment:
+    -->aws ec2 disassociate-transit-gateway-route-table --association-id <association-id>
+    -->aws ec2 disassociate-transit-gateway-route-table --association-id tgw-rtbassoc-0abcd1234efgh5678 
+80)Create VPC with IPv6 CIDR Block:
+    -->aws ec2 create-vpc --cidr-block <CIDR-block> --amazon-provided-ipv6-cidr-block
+    -->aws ec2 create-vpc --cidr-block 10.0.0.0/16 --amazon-provided-ipv6-cidr-block
+81)Associate IPv6 CIDR Block with VPC:
+    -->aws ec2 associate-vpc-cidr-block --vpc-id <vpc-id> --amazon-provided-ipv6-cidr-block
+    -->aws ec2 associate-vpc-cidr-block --vpc-id vpc-0abcd1234efgh5678 --amazon-provided-ipv6-cidr-block
+82)Disassociate IPv6 CIDR Block from VPC:
+    -->aws ec2 disassociate-vpc-cidr-block --association-id <association-id>
+    -->aws ec2 disassociate-vpc-cidr-block --association-id vpc-cidr-assoc-0abcd1234efgh5678    
+83)Describe VPC CIDR Blocks:
+    -->aws ec2 describe-vpcs --vpc-ids <vpc-id> --query 'Vpcs[].CidrBlockAssociationSet'
+    -->aws ec2 describe-vpcs --vpc-ids vpc-0abcd1234efgh5678 --query 'Vpcs[].CidrBlockAssociationSet'
+84)Create Subnet with IPv6 CIDR Block:
+    -->aws ec2 create-subnet --vpc-id <vpc-id> --cidr-block <CIDR-block> --ipv6-cidr-block <IPv6-CIDR-block>
+    -->aws ec2 create-subnet --vpc-id vpc-0abcd1234efgh5678 --cidr-block 10.0.1.0/24 --ipv6-cidr-block 2001:0db8:1234:0001::/64
+85)Describe Subnet IPv6 CIDR Blocks:
+    -->aws ec2 describe-subnets --subnet-ids <subnet-id> --query 'Subnets[].Ipv6CidrBlockAssociationSet'
+    -->aws ec2 describe-subnets --subnet-ids subnet-0abcd1234efgh5678 --query 'Subnets[].Ipv6CidrBlockAssociationSet'
+86)Modify Subnet to Enable/Disable Auto-Assign IPv6 Address:
+    -->aws ec2 modify-subnet-attribute --subnet-id <subnet-id> --map-public-ip-on-launch | --no-map-public-ip-on-launch
+    -->aws ec2 modify-subnet-attribute --subnet-id subnet-0abcd1234efgh5678 --map-public-ip-on-launch   
+    -->aws ec2 modify-subnet-attribute --subnet-id <subnet-id> --assign-ipv6-address-on-creation | --no-assign-ipv6-address-on-creation
+    -->aws ec2 modify-subnet-attribute --subnet-id subnet-0abcd1234efgh5678 --assign-ipv6-address-on-creation
+87)Describe Subnet Attribute:
+    -->aws ec2 describe-subnet-attribute --subnet-id <subnet-id> --attribute <attribute>
+    -->aws ec2 describe-subnet-attribute --subnet-id subnet-0abcd1234efgh5678 --attribute mapPublicIpOnLaunch
+    -->aws ec2 describe-subnet-attribute --subnet-id subnet-0abcd1234efgh5678 --attribute assignIpv6AddressOnCreation       
+    

@@ -1,0 +1,143 @@
+#AWS IAM:
+---------
+->IAM=Identity and Access Management
+->IAM is a web service that helps you securely control access to AWS resources for your users.
+->IAM enables you to manage users, groups, roles, and permissions to allow or deny access to AWS resources.
+#AWS IAM CLI Commands:
+aws iam create-user --user-name <username>
+aws iam delete-user --user-name <username>
+aws iam list-users
+aws iam create-group --group-name <groupname>
+aws iam delete-group --group-name <groupname>
+aws iam list-groups
+aws iam add-user-to-group --user-name <username> --group-name <groupname>
+aws iam remove-user-from-group --user-name <username> --group-name <groupname>
+aws iam create-role --role-name <rolename> --assume-role-policy-document file://trust-policy.json
+aws iam delete-role --role-name <rolename>
+aws iam list-roles
+aws iam attach-role-policy --role-name <rolename> --policy-arn arn:aws:iam::aws:policy/<policyname>
+aws iam detach-role-policy --role-name <rolename> --policy-arn arn:aws:iam::aws:policy/<policyname>
+aws iam create-policy --policy-name <policyname> --policy-document file://policy.json
+aws iam delete-policy --policy-arn arn:aws:iam::aws:policy/<policyname>
+aws iam list-policies
+aws iam get-user --user-name <username>
+aws iam get-group --group-name <groupname>
+aws iam get-role --role-name <rolename>
+aws iam get-policy --policy-arn arn:aws:iam::aws:policy/<policyname>
+aws iam update-user --user-name <username> --new-user-name <new-username>
+aws iam update-group --group-name <groupname> --new-group-name <new-groupname>
+aws iam update-role --role-name <rolename> --new-role-name <new-rolename>
+aws iam update-policy --policy-arn arn:aws:iam::aws:policy/<policyname> --policy-document file://new-policy.json
+aws iam generate-credential-report
+aws iam get-credential-report
+aws iam list-access-keys --user-name <username>
+aws iam create-access-key --user-name <username>
+aws iam delete-access-key --user-name <username> --access-key-id <access-key-id>
+aws iam update-access-key --user-name <username> --access-key-id <access-key-id --status Active|Inactive
+aws iam list-user-policies --user-name <username>
+aws iam put-user-policy --user-name <username> --policy-name <policyname> --policy-document file://policy.json
+aws iam delete-user-policy --user-name <username> --policy-name <policyname>
+aws iam list-group-policies --group-name <groupname>
+aws iam put-group-policy --group-name <groupname> --policy-name <policyname> --policy-document file://policy.json
+aws iam delete-group-policy --group-name <groupname> --policy-name <policyname>
+aws iam list-role-policies --role-name <rolename>
+aws iam put-role-policy --role-name <rolename> --policy-name <policyname> --policy-document file://policy.json
+aws iam delete-role-policy --role-name <rolename> --policy-name <policyname>
+aws iam simulate-principal-policy --policy-source-arn arn:aws:iam::<account-id>:user/<username> --action-names <action1> <action2>
+aws iam simulate-custom-policy --policy-input-list file://policy.json --action-names <action1> <action2>
+aws iam get-account-summary
+aws iam get-account-authorization-details --filter User|Group|Role|Policy
+aws iam list-account-aliases
+aws iam create-account-alias --account-alias <alias>
+aws iam delete-account-alias --account-alias <alias>
+aws iam get-login-profile --user-name <username>
+aws iam create-login-profile --user-name <username> --password <password> --password-reset-required
+aws iam delete-login-profile --user-name <username>
+aws iam update-login-profile --user-name <username> --password <new-password> --password-reset-required
+aws iam enable-mfa-device --user-name <username> --serial-number <serial-number> --authentication-code1 <code1> --authentication-code2 <code2>
+aws iam disable-mfa-device --user-name <username> --serial-number <serial-number>
+aws iam list-mfa-devices --user-name <username>
+aws iam get-mfa-device --user-name <username> --serial-number <serial-number>
+aws iam resync-mfa-device --user-name <username> --serial-number <serial-number> --authentication-code1 <code1> --authentication-code2 <code2>
+aws iam create-service-linked-role --aws-service-name <service-name> --description <description>
+aws iam delete-service-linked-role --role-name <role-name>
+aws iam list-service-linked-roles --aws-service-name <service-name>
+aws iam get-service-linked-role-deletion-status --role-name <role-name>
+aws iam generate-service-last-accessed-details --arn arn:aws:iam::<account-id>:user/<username>
+aws iam get-service-last-accessed-details --job-id <job-id>
+
+#IAM USERS AND GROUPS:
+#----------------------
+->Users are individual identities that can be assigned permissions to access AWS resources.
+->Groups are collections of users that can be assigned permissions collectively.
+
+# IAM Policy Structure:
+#----------------------
+->Policies are JSON documents that define permissions.
+->A policy consists of one or more statements, each containing an effect (Allow or Deny), an action (the AWS service actions), and a resource (the AWS resources the actions apply to).
+# Example IAM Policy:
+{
+  "Version": "2012-10-17",
+  "Id": "Policy1234567890",
+  "Statement": [
+    {
+        "Sid": "Stmt1234567890",
+      "Principal": {
+        "AWS": "arn:aws:iam::123456789012:user/ExampleUser"
+      },
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::example-bucket",
+        "arn:aws:s3:::example-bucket/*"
+      ]
+    }
+  ]
+}   
+
+->The "Version" field specifies the version of the policy language.
+->The "Id" field is an optional identifier for the policy.
+->The "Statement" field contains an array of individual statements.
+->Each statement has a "Sid" (optional), "Principal" (who the policy applies to), "Effect" (Allow or Deny), "Action" (the actions allowed or denied), and "Resource" (the resources the actions apply to).
+->sid is an optional identifier for the statement.
+->The "Principal" field specifies the AWS account or user the policy applies to.
+->The "Effect" field specifies whether the policy allows or denies access.
+->The "Action" field specifies the AWS service actions that are allowed or denied.
+->The "Resource" field specifies the AWS resources the actions apply to, using Amazon Resource Names (ARNs).
+
+#How can users access AWS:
+--------------------------
+->to access AWS, you have three options:
+  1. Use the AWS Management Console, a web-based interface for managing AWS services.(protected by password+MFA)
+  2. Use the AWS Command Line Interface (CLI), a command-line tool for managing AWS services.(protected by access keys)
+  3. Use the AWS SDKs (Software Development Kits) to integrate AWS services into your applications.(protected by access keys)
+
+#AWS cli:
+---------
+->AWS CLI is a unified tool to manage AWS services from the command line.
+->It allows you to control multiple AWS services and automate them through scripts.
+#AWS CLI Installation:
+----------------------
+->To install AWS CLI, follow the instructions for your operating system:
+  - For Windows: Download the installer from the AWS CLI website and run it.
+  - For macOS: Use Homebrew with the command `brew install awscli`.
+  - For Linux: Use package managers like `apt` or `yum`, or download the installer script from the AWS CLI website.
+#AWS CLI Configuration:
+->aws configure 
+->To configure AWS CLI, run the command `aws configure` and provide your AWS Access Key ID, Secret Access Key, default region name, and output format.
+
+#AWS SDKs:
+----------------------
+->AWS SDKs are libraries that allow developers to interact with AWS services using programming languages.
+->They provide a higher-level abstraction over the AWS APIs, making it easier to integrate AWS services into applications.
+#AWS SDKs Installation:
+->To install AWS SDKs, follow the instructions for your programming language:
+  - For Python: Use `pip install boto3`.
+  - For JavaScript: Use `npm install aws-sdk`.
+  - For Java: Use Maven or Gradle to include the AWS SDK dependency.
+  - For .NET: Use NuGet to install the AWS SDK packages.
+#AWS SDKs Configuration:
+->To configure AWS SDKs, you typically need to provide your AWS Access Key ID, Secret Access Key, and region. This can be done through environment variables, configuration files, or directly in your code.

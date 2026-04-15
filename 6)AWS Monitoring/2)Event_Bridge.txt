@@ -1,0 +1,12 @@
+# AWS EventBridge:
+-----------------
+    - EventBridge is a serverless event bus service that allows you to connect applications using events.   
+    - It enables you to build event-driven architectures by routing events from various sources to targets such as AWS Lambda, Amazon SNS, Amazon SQS, and more.
+    - EventBridge can be used to create custom event buses, which can be used to route events from your applications or third-party services to AWS services or your own applications.
+    - It supports both AWS services and custom applications as event sources, making it a versatile solution for building event-driven architectures.
+    - EventBridge also provides features such as event filtering, transformation, and schema registry, allowing you to manage and process events efficiently.
+    - It is a fully managed service, which means you don't have to worry about infrastructure management, scaling, or maintenance. You can focus on building your applications and let EventBridge handle the event routing and processing.
+    - EventBridge is designed to be highly scalable and can handle a large number of events with low latency, making it suitable for real-time applications and microservices architectures.    
+    - It also integrates with AWS Identity and Access Management (IAM) for secure access control, allowing you to define permissions for who can publish and consume events on your event buses.    
+    - EventBridge supports both scheduled events and event-driven triggers, allowing you to automate tasks and workflows based on specific events or time intervals.    
+    - Overall, AWS EventBridge is a powerful service for building event-driven applications and architectures, providing a flexible and scalable solution for connecting applications and services using events.    
